@@ -1,5 +1,6 @@
 package com.example.todoapp;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +16,15 @@ public class TodoService {
         this.todoMapper = todoMapper;
     }
 
-    public List<Todo> search(String keyword, String category, String order) {
+    public List<Todo> search(String keyword, String category, String order, LocalDate from, LocalDate to) {
         String searchKeyword = keyword.isBlank() ? null : keyword;
         String searchCategory = category.isBlank() || "すべて".equals(category) ? null : category;
         String normalizedOrder = "desc".equals(order) ? "desc" : "asc";
-        return todoMapper.search(searchKeyword, searchCategory, normalizedOrder);
+        return todoMapper.search(searchKeyword, searchCategory, normalizedOrder, from, to);
+    }
+
+    public List<Todo> search(String keyword, String category, String order) {
+        return search(keyword, category, order, null, null);
     }
 
     public Todo findById(Long id) {

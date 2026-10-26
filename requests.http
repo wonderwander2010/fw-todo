@@ -32,3 +32,36 @@ DELETE http://localhost:8080/api/todos/8
 
 ### 5. 祝日を直接取ってくる
 GET https://holidays-jp.github.io/api/v1/date.json
+
+### 就職活動の準備を3件登録する（1件目）
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "履歴書を見直す",
+  "category": "就職活動",
+  "priority": 1,
+  "dueDate": "2026-04-04"
+}
+
+### 就職活動の準備を3件登録する（2件目）
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "企業説明会の情報を調べる",
+  "category": "就職活動",
+  "priority": 2,
+  "dueDate": "2026-04-04"
+}
+
+### 就職活動の準備を3件登録する（3件目）
+POST http://localhost:8080/api/todos
+Content-Type: application/json
+
+{
+  "title": "面接で話す自己PRを準備する",
+  "category": "就職活動",
+  "priority": 3,
+  "dueDate": "2026-04-04"
+}

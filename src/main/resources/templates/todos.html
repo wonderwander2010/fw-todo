@@ -10,7 +10,7 @@
     <main class="container">
         <h1 class="page-title">やること一覧</h1>
         <p class="flash" th:if="${message}" th:text="${message}"></p>
-        <p><a class="btn" href="/todos/new">新規登録</a></p>
+        <p><a class="btn" href="/todos/new">新規登録</a> <a class="btn sub" href="/calendar">カレンダーで見る</a></p>
         <form class="search-bar" action="/todos" method="get">
             <label for="keyword">やることの名前</label>
             <input class="form-input" id="keyword" type="text" name="keyword" th:value="${keyword}">

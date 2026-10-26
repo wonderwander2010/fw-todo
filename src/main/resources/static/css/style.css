@@ -117,3 +117,35 @@ body {
     color: #334155;
     text-decoration: underline;
 }
+
+.calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.calendar-navigation-group {
+    display: flex;
+    gap: 16px;
+}
+
+.calendar-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.calendar-table th,
+.calendar-table td {
+    height: 72px;
+    border: 1px solid #cbd5e1;
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.calendar-table th {
+    height: auto;
+    background: #f1f5f9;
+    text-align: center;
+}

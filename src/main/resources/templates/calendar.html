@@ -41,6 +41,30 @@
         </table>
     </main>
     <script>
+        async function loadWeather() {
+            const calendar = document.querySelector(".calendar-table");
+            const params = new URLSearchParams({ from: calendar.dataset.from, to: calendar.dataset.to });
+
+            try {
+                const res = await fetch(`/api/weather?${params.toString()}`);
+                if (!res.ok || res.headers.has("X-Weather-Unavailable")) return;
+                const weatherByDate = await res.json();
+
+                document.querySelectorAll(".calendar-table [data-date]").forEach(cell => {
+                    const weather = weatherByDate[cell.dataset.date];
+                    if (!weather) return;
+
+                    const display = document.createElement("div");
+                    display.className = "calendar-weather";
+                    display.textContent = `${weather.icon} ${Math.round(weather.temperatureMin)}°–${Math.round(weather.temperatureMax)}°`;
+                    display.title = `${weather.description}（最低 ${weather.temperatureMin}°C／最高 ${weather.temperatureMax}°C）`;
+                    cell.appendChild(display);
+                });
+            } catch (error) {
+                // 天気の取得に失敗しても、カレンダーと予定はそのまま表示します。
+            }
+        }
+
         async function loadTodos() {
             const calendar = document.querySelector(".calendar-table");
             const from = calendar.dataset.from;
@@ -107,6 +131,8 @@
 
         loadTodos();
         loadHolidays();
+        loadWeather();
     </script>
+    <p class="weather-attribution">天気データ: <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">Open-Meteo</a></p>
 </body>
 </html>

@@ -149,3 +149,16 @@ body {
     background: #f1f5f9;
     text-align: center;
 }
+
+.calendar-weather {
+    margin: 4px 0;
+    color: #334155;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.weather-attribution {
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 0.8rem;
+}

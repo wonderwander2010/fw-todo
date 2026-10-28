@@ -12,6 +12,7 @@
             priority,
             due_date,
             completed,
+            completed_at,
             created_at,
             updated_at
         FROM todos
@@ -53,6 +54,7 @@
             priority,
             due_date,
             completed,
+            completed_at,
             created_at,
             updated_at
         FROM todos
@@ -67,6 +69,11 @@
             category = #{category},
             priority = #{priority},
             due_date = #{dueDate},
+            completed_at = CASE
+                WHEN completed = FALSE AND #{completed} = TRUE THEN CURRENT_TIMESTAMP
+                WHEN completed = TRUE AND #{completed} = FALSE THEN NULL
+                ELSE completed_at
+            END,
             completed = #{completed}
         WHERE id = #{id}
     </update>

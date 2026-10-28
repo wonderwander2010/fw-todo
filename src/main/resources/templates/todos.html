@@ -40,12 +40,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="todo : ${todos}">
+                <tr th:each="todo : ${todos}"
+                    th:classappend="${todo.dueDate != null and todo.dueDate.isBefore(T(java.time.LocalDate).now()) and !todo.completed} ? ' overdue' : ''">
                     <td th:text="${todo.title}">やること</td>
                     <td th:text="${todo.category}">ジャンル</td>
-                    <td th:text="${todo.priority == 1 ? '高' : (todo.priority == 2 ? '中' : '低')}">優先度</td>
-                    <td th:text="${todo.dueDate}">期限</td>
-                    <td th:text="${todo.completed ? '完了' : '未完了'}">状態</td>
+                    <td><span th:text="${todo.priority == 1 ? '高' : (todo.priority == 2 ? '中' : '低')}">優先度</span><span class="priority-mark" th:if="${todo.priority == 1}" aria-label="最優先"> ★</span></td>
+                    <td th:text="${todo.dueDate}"
+                        th:style="${todo.dueDate != null and todo.dueDate.isBefore(T(java.time.LocalDate).now()) and !todo.completed} ? 'background-color: #fee2e2' : ''">期限</td>
+                    <td><span th:text="${todo.completed ? '完了' : '未完了'}">状態</span><span th:if="${todo.completed and todo.completedAt != null}" th:text="| (${#temporals.format(todo.completedAt, 'yyyy-MM-dd')})|"></span></td>
                     <td><a class="link" th:href="@{/todos/{id}/edit(id=${todo.id})}">編集</a> <a class="link" th:href="@{/todos/{id}/delete(id=${todo.id})}">削除</a></td>
                 </tr>
             </tbody>
